@@ -3,62 +3,162 @@ import openai
 from dotenv import load_dotenv
 from string import Template
 from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
+from langchain.prompts import PromptTemplate
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-llm = ChatOpenAI(model="gpt-4", temperature=0.5)
-
-
-def map_note(note, mapping):
-    return mapping.get(note, "")
-
-
-note_map = {
-    1: "stets zur vollsten Zufriedenheit",
-    2: "stets zur vollen Zufriedenheit",
-    3: "zur vollen Zufriedenheit",
-    4: "im Großen und Ganzen zur Zufriedenheit",
-    5: "nicht zur Zufriedenheit"
-}
-
-verhalten_map = {
-    1: "nicht zufriedenstellend",
-    2: "ausbaufähig",
-    3: "insgesamt zufriedenstellend",
-    4: "gut",
-    5: "stets vorbildlich"
-}
+llm = ChatOpenAI(model_name="gpt-4", temperature=0.2)
 
 def generate_zeugnis(user_data):
-    template_path = f"prompts/{user_data['zeugnis_typ'].lower().replace('ü', 'ue').replace('ä', 'ae').replace('ö', 'oe')}.txt"
+    zeugnistyp = user_data["zeugnis_typ"]
+    anrede = user_data["anrede"]
+    vorname = user_data["vorname"]
+    nachname = user_data["nachname"]
+    geburtsdatum = user_data["geburtsdatum"]
+    eintrittsdatum = user_data["eintrittsdatum"]
+    austrittsdatum = user_data["austrittsdatum"]
+    position = user_data["position"]
+    ort = user_data["ort"]
+    datum = user_data["datum"]
+    aufgaben = user_data["taetigkeiten"]
+    fachwissen = user_data["fachwissen"]
+    auffassungsgabe = user_data["auffassungsgabe"]
+    arbeitsweise = user_data["arbeitsweise"]
+    arbeitserfolg = user_data["arbeitserfolg"]
+    belastbarkeit = user_data["belastbarkeit"]
+    motivation = user_data["motivation"]
+    leistung = user_data["leistung"]
+    verhalten = user_data["verhalten"]
+    ausscheidungsgrund = user_data["ausscheidungsgrund"]
+    kontakt = user_data["kontakt"]
+    empfehlung = user_data["empfehlung"]
+    wiederbewerbung = user_data["wiederbewerbung"]
+    erfolge = user_data["erfolge"]
+    zusaetze = user_data["zusaetze"]
 
-    with open(template_path, "r", encoding="utf-8") as f:
-        template = Template(f.read())
+    struktur_vorgabe = """
+Bitte verwende beim Formulieren des Zeugnisses folgende Struktur:
 
-    # Bewertungen in Textform bringen
-    user_data.update({
-        "fachwissen_text": map_note(user_data["fachwissen"], note_map),
-        "auffassungsgabe_text": map_note(user_data["auffassungsgabe"], note_map),
-        "arbeitsweise_text": map_note(user_data["arbeitsweise"], note_map),
-        "arbeitserfolg_text": map_note(user_data["arbeitserfolg"], note_map),
-        "belastbarkeit_text": map_note(user_data["belastbarkeit"], note_map),
-        "motivation_text": map_note(user_data["motivation"], note_map),
-        "leistung_text": map_note(user_data["leistung"], note_map),
-        "verhalten_text": verhalten_map.get(user_data["verhalten"], ""),
-        "kontakt_text": f"{user_data['anrede']} {user_data['nachname']} pflegte stets einen professionellen Kontakt zu unseren Kunden." if user_data["kontakt"] else "",
-        "erfolge_text": f"{user_data['anrede']} {user_data['nachname']} konnte in ihrer/seiner Tätigkeit besondere Erfolge erzielen." if user_data["erfolge"] else "",
-        "wiederbewerbung_text": f"Wir würden uns freuen, {user_data['anrede']} {user_data['nachname']} erneut im Unternehmen begrüßen zu dürfen." if user_data["wiederbewerbung"] else "",
-        "empfehlung_text": f"Wir empfehlen {user_data['anrede']} {user_data['nachname']} uneingeschränkt für neue berufliche Herausforderungen." if user_data["empfehlung"] else "",
-        "zusaetze_text": ", ".join(user_data["zusaetze"]) if user_data["zusaetze"] else ""
-    })
+1. Einleitung:
+   - Name, Geburtsdatum, Zeitraum und Position
+2. Aufgabenbeschreibung:
+   - Auflistung und Beschreibung der Tätigkeiten
+3. Fachliche Leistung:
+   - Bewertung von Fachwissen, Auffassungsgabe, Motivation etc.
+4. Arbeitsweise und Arbeitserfolg:
+   - Qualität, Effizienz, Sorgfalt
+5. Sozialverhalten:
+   - Verhalten gegenüber Vorgesetzten, Kolleg:innen und Kund:innen
+6. Optional:
+   - Erwähnung besonderer Erfolge, Zusatzkompetenzen, Empfehlung
+7. Schlussformulierung:
+   - Dank, Bedauern, Zukunftswünsche, Ort und Datum
+"""
 
-    # Tätigkeitstext vorbereiten
-    user_data["taetigkeiten_formatiert"] = "\n".join(f"- {t}" for t in user_data["taetigkeiten"])
+    prompt = PromptTemplate(
+    input_variables=[
+        "zeugnis_typ",
+        "anrede",
+        "vorname",
+        "nachname",
+        "geburtsdatum",
+        "eintrittsdatum",
+        "austrittsdatum",
+        "position",
+        "ort",
+        "datum",
+        "taetigkeiten",
+        "fachwissen",
+        "auffassungsgabe",
+        "arbeitsweise",
+        "arbeitserfolg",
+        "belastbarkeit",
+        "motivation",
+        "leistung",
+        "verhalten",
+        "ausscheidungsgrund",
+        "kontakt",
+        "empfehlung",
+        "wiederbewerbung",
+        "erfolge",
+        "zusaetze",
+    ],
+    template="""
+Erstelle ein professionelles, gut formuliertes und vollständiges {zeugnis_typ} auf Deutsch basierend auf den folgenden Informationen. Verwende eine klare, strukturierte und typische Zeugnissprache. Das Zeugnis soll alle wichtigen Komponenten enthalten: Einleitung, Tätigkeiten, Leistungsbeurteilung, Sozialverhalten, ggf. Erfolge, Schlussteil mit Austrittsgrund und Empfehlung.
 
-    # Prompt an LLM schicken
-    prompt_input = template.substitute(user_data)
+Hier sind die Angaben:
 
-    response = llm.predict(prompt_input)
+- Anrede: {anrede}
+- Vorname: {vorname}
+- Nachname: {nachname}
+- Geburtsdatum: {geburtsdatum}
+- Position: {position}
+- Eintrittsdatum: {eintrittsdatum}
+- Austrittsdatum: {austrittsdatum}
+- Tätigkeiten:
+{taetigkeiten}
 
-    return response
+Leistungsbeurteilung:
+- Fachwissen: {fachwissen}
+- Auffassungsgabe: {auffassungsgabe}
+- Arbeitsweise: {arbeitsweise}
+- Arbeitserfolg: {arbeitserfolg}
+- Belastbarkeit: {belastbarkeit}
+- Motivation: {motivation}
+- Gesamtleistung: {leistung}
+- Sozialverhalten: {verhalten}
+
+Weitere Angaben:
+- Erfolge: {erfolge}
+- Zusätzliche Eigenschaften / Stärken: {zusaetze}
+- Kontakt zu Kunden und Geschäftspartnern: {kontakt}
+- Empfehlung: {empfehlung}
+- Wiederbewerbung erwünscht: {wiederbewerbung}
+- Ausscheidungsgrund: {ausscheidungsgrund}
+
+Ort und Datum:
+- Ort: {ort}
+- Datum: {datum}
+
+Bitte achte auf:
+- überprüfe deinen Text auf Inkonsistenzen in den Notenformulierungen.
+- achte auf Dopplungen in den Formulierungen.
+- einen natürlichen, fließenden Stil.
+- professionelle Formulierungen entsprechend dem Zeugnisstil.
+- konsistente Notenformulierungen entsprechend den Bewertungen.
+- eine Länge von ca. 300–500 Wörtern.
+"""
+)
+
+    final_prompt = prompt.format(
+    zeugnis_typ=user_data["zeugnis_typ"],
+    anrede=user_data["anrede"],
+    vorname=user_data["vorname"],
+    nachname=user_data["nachname"],
+    geburtsdatum=user_data["geburtsdatum"],
+    eintrittsdatum=user_data["eintrittsdatum"],
+    austrittsdatum=user_data["austrittsdatum"],
+    position=user_data["position"],
+    ort=user_data["ort"],
+    datum=user_data["datum"],
+    taetigkeiten="\n".join(user_data["taetigkeiten"]),
+    fachwissen=user_data["fachwissen"],
+    auffassungsgabe=user_data["auffassungsgabe"],
+    arbeitsweise=user_data["arbeitsweise"],
+    arbeitserfolg=user_data["arbeitserfolg"],
+    belastbarkeit=user_data["belastbarkeit"],
+    motivation=user_data["motivation"],
+    leistung=user_data["leistung"],
+    verhalten=user_data["verhalten"],
+    ausscheidungsgrund=user_data["ausscheidungsgrund"],
+    kontakt=user_data["kontakt"],
+    empfehlung=user_data["empfehlung"],
+    wiederbewerbung=user_data["wiederbewerbung"],
+    erfolge=user_data["erfolge"],
+    zusaetze=user_data["zusaetze"],
+)
+
+    response = llm.invoke(final_prompt)
+    return response.content
