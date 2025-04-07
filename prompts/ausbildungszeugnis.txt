@@ -1,1 +1,29 @@
+Ausbildungszeugnis
+
+${anrede} ${nachname}, geboren am ${geburtsdatum}, absolvierte in der Zeit vom ${eintrittsdatum} bis zum ${austrittsdatum} eine Ausbildung zur/zum ${position} in unserem Unternehmen.
+
+Im Rahmen der Ausbildung durchlief ${anrede} ${nachname} verschiedene Abteilungen und war unter anderem mit folgenden Aufgaben betraut:
+${taetigkeiten}
+
+${fachwissen}
+${auffassungsgabe}
+${arbeitsweise}
+${belastbarkeit}
+${arbeitserfolg}
+${motivation}
+
+${leistung}
+
+${verhalten}
+${kontakt}
+${erfolge}
+${zusaetze}
+${wiederbewerbung}
+${empfehlung}
+
+${ausscheidungsgrund}
+
+${ort}, ${datum}
+
+(Unterschrift)
 
