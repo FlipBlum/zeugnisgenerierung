@@ -1,1 +1,29 @@
+Praktikumszeugnis
+
+${anrede} ${nachname}, geboren am ${geburtsdatum}, absolvierte in der Zeit vom ${eintrittsdatum} bis zum ${austrittsdatum} ein Praktikum in unserem Unternehmen im Bereich ${position}.
+
+Während des Praktikums war ${anrede} ${nachname} mit folgenden Aufgaben betraut:
+${taetigkeiten}
+
+${fachwissen}
+${auffassungsgabe}
+${arbeitsweise}
+${belastbarkeit}
+${arbeitserfolg}
+${motivation}
+
+${leistung}
+
+${verhalten}
+${kontakt}
+${erfolge}
+${zusaetze}
+${wiederbewerbung}
+${empfehlung}
+
+${ausscheidungsgrund}
+
+${ort}, ${datum}
+
+(Unterschrift)
 
