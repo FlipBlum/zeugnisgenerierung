@@ -1,1 +1,29 @@
+Arbeitszeugnis
+
+${anrede} ${nachname}, geboren am ${geburtsdatum}, war vom ${eintrittsdatum} bis zum ${austrittsdatum} in unserem Unternehmen als ${position} tätig.
+
+Im Rahmen dieser Tätigkeit umfasste ihr/sein Aufgabenbereich unter anderem folgende Schwerpunkte:
+${taetigkeiten}
+
+${fachwissen}
+${auffassungsgabe}
+${arbeitsweise}
+${belastbarkeit}
+${arbeitserfolg}
+${motivation}
+
+${leistung}
+
+${verhalten}
+${kontakt}
+${erfolge}
+${zusaetze}
+${wiederbewerbung}
+${empfehlung}
+
+${ausscheidungsgrund}
+
+${ort}, ${datum}
+
+(Unterschrift)
 
