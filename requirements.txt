@@ -3,4 +3,4 @@ langchain
 openai
 fpdf
 python-dotenv
-python-dotenv
+langfchain_community
