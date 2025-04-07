@@ -1,98 +1,82 @@
 import streamlit as st
 from zeugnis_generator import generate_zeugnis
-from fpdf import FPDF
 
-st.title("📝 Arbeitszeugnis Generator")
+st.set_page_config(page_title="Zeugnisgenerator", layout="centered")
+st.title("📝 Zeugnisgenerator")
 
-with st.form("zeugnis_form"):
-    art = st.selectbox("Zeugnistyp", ["Arbeitszeugnis", "Praktikumszeugnis", "Ausbildungszeugnis"])
-    zwischenzeugnis = st.checkbox("Zwischenzeugnis?")
-    anrede = st.selectbox("Anrede", ["Herr", "Frau", "Divers"])
-    titel = st.text_input("Titel")
-    vorname = st.text_input("Vorname")
-    nachname = st.text_input("Nachname")
-    geburtsdatum = st.date_input("Geburtsdatum")
+# Zeugnistyp Auswahl
+zeugnis_typ = st.selectbox("Zeugnistyp", ["Arbeitszeugnis", "Praktikumszeugnis", "Ausbildungszeugnis"])
 
-    firmenname = st.text_input("Firmenname")
-    firmenbeschreibung = st.text_area("Firmenbeschreibung")
+# Basisdaten
+st.subheader("Allgemeine Informationen")
+anrede = st.selectbox("Anrede", ["Herr", "Frau"])
+vorname = st.text_input("Vorname")
+nachname = st.text_input("Nachname")
+geburtsdatum = st.date_input("Geburtsdatum")
+eintrittsdatum = st.date_input("Eintrittsdatum")
+austrittsdatum = st.date_input("Austrittsdatum")
+position = st.text_input("Position")
+ort = st.text_input("Ort")
+datum = st.date_input("Datum der Ausstellung")
 
-    berufsbezeichnung = st.text_input("Berufsbezeichnung")
-    beschaeftigung = st.selectbox("Beschäftigungsart", ["Vollzeit", "Teilzeit"])
-    beginn = st.date_input("Beschäftigungsbeginn")
-    ende = st.date_input("Beschäftigungsende")
-    abteilung = st.text_input("Abteilung")
-    einsatzort = st.text_input("Einsatzort")
-    taetigkeiten = st.text_area("Tätigkeiten")
+# Tätigkeiten
+st.subheader("Tätigkeiten")
+taetigkeiten = st.text_area("Bitte listen Sie die wichtigsten Tätigkeiten stichpunktartig auf", height=200)
 
-    st.subheader("Fachliche Bewertung")
-    fachwissen = st.slider("Fachwissen", 1, 5, 3)
-    belastbarkeit = st.slider("Belastbarkeit", 1, 5, 3)
-    auffassungsgabe = st.slider("Auffassungsgabe", 1, 5, 3)
-    arbeitsweise = st.slider("Arbeitsweise", 1, 5, 3)
-    arbeitserfolg = st.slider("Arbeitserfolg", 1, 5, 3)
-    motivation = st.slider("Motivation", 1, 5, 3)
-    leistung = st.slider("Leistungszusammenfassung", 1, 5, 3)
+# Leistungsbeurteilung
+st.subheader("Leistungsbeurteilung (1 = sehr gut, 5 = mangelhaft)")
+fachwissen = st.slider("Fachwissen", 1, 5, 2)
+auffassungsgabe = st.slider("Auffassungsgabe", 1, 5, 2)
+arbeitsweise = st.slider("Arbeitsweise", 1, 5, 2)
+arbeitserfolg = st.slider("Arbeitserfolg", 1, 5, 2)
+belastbarkeit = st.slider("Belastbarkeit", 1, 5, 2)
+motivation = st.slider("Motivation", 1, 5, 2)
+leistung = st.slider("Gesamtleistung", 1, 5, 2)
+verhalten = st.slider("Verhalten gegenüber Vorgesetzten & Kollegen", 1, 5, 3)
 
-    erfolge = st.checkbox("Berufliche Erfolge hervorheben?")
-    zusaetze = st.multiselect("Zusätzliche Eigenschaften", [
-        "IT-Kenntnisse", "Marktkenntnisse", "Zuverlässigkeit", "Motivation und Begeisterung",
-        "Eigeninitiative und Proaktivität", "Anpassungsfähigkeit, Resilienz und Flexibilität",
-        "Lernbereitschaft und Kreativität", "Kommunikationsfähigkeit",
-        "Verantwortungsbewusstsein und Selbstorganisation", "Teamfähigkeit",
-        "Problemlösungskompetenz", "Anerkennung und Wertschätzung"
-    ])
+# Zusätzliche Felder
+st.subheader("Zusatzinformationen")
+kontakt = st.radio("Hatte die Person Kundenkontakt?", ["Ja", "Nein"])
+empfehlung = st.radio("Soll eine Empfehlung ausgesprochen werden?", ["Ja", "Nein"])
+wiederbewerbung = st.radio("Würden Sie die Person erneut einstellen?", ["Ja", "Nein"])
+erfolge = st.checkbox("Gab es besondere Erfolge?")
+zusaetze = st.multiselect("Zusätzliche positive Eigenschaften", [
+    "Teamfähigkeit", "Lernbereitschaft", "Zuverlässigkeit", "Resilienz",
+    "Flexibilität", "Problemlösungskompetenz", "Kreativität", "Eigeninitiative", "Anpassungsfähigkeit"
+])
 
-    verhalten = st.slider("Verhalten gegenüber Führungskräften & Kolleg:innen", 1, 5, 3)
-    kontakt = st.checkbox("Kontakt zu Kunden oder Partnern?")
-    grund = st.text_area("Grund für das Ausscheiden")
-    wiederbewerbung = st.checkbox("Wiederbewerbung erwünscht?")
-    empfehlung = st.checkbox("Empfehlung aussprechen?")
+ausscheidungsgrund = st.text_input("Ausscheidungsgrund (optional)", placeholder="z. B. Das Arbeitsverhältnis endete auf eigenen Wunsch.")
 
-    submitted = st.form_submit_button("Zeugnis generieren")
-
-if submitted:
+if st.button("🔍 Zeugnis generieren"):
     user_data = {
-        "art": art,
+        "zeugnis_typ": zeugnis_typ,
         "anrede": anrede,
-        "titel": titel,
         "vorname": vorname,
         "nachname": nachname,
         "geburtsdatum": geburtsdatum.strftime("%d.%m.%Y"),
-        "firmenname": firmenname,
-        "firmenbeschreibung": firmenbeschreibung,
-        "berufsbezeichnung": berufsbezeichnung,
-        "beschaeftigung": beschaeftigung,
-        "beginn": beginn.strftime("%d.%m.%Y"),
-        "ende": ende.strftime("%d.%m.%Y"),
-        "abteilung": abteilung,
-        "einsatzort": einsatzort,
-        "taetigkeiten": taetigkeiten,
+        "eintrittsdatum": eintrittsdatum.strftime("%d.%m.%Y"),
+        "austrittsdatum": austrittsdatum.strftime("%d.%m.%Y"),
+        "position": position,
+        "ort": ort,
+        "datum": datum.strftime("%d.%m.%Y"),
+        "taetigkeiten": taetigkeiten.split("\n"),
         "fachwissen": fachwissen,
-        "belastbarkeit": belastbarkeit,
         "auffassungsgabe": auffassungsgabe,
         "arbeitsweise": arbeitsweise,
         "arbeitserfolg": arbeitserfolg,
+        "belastbarkeit": belastbarkeit,
         "motivation": motivation,
         "leistung": leistung,
-        "erfolge": "Ja" if erfolge else "Nein",
-        "zusaetze": ", ".join(zusaetze),
         "verhalten": verhalten,
-        "kontakt": "Ja" if kontakt else "Nein",
-        "grund": grund,
-        "wiederbewerbung": "Ja" if wiederbewerbung else "Nein",
-        "empfehlung": "Ja" if empfehlung else "Nein"
+        "ausscheidungsgrund": ausscheidungsgrund,
+        "kontakt": kontakt,
+        "empfehlung": empfehlung,
+        "wiederbewerbung": wiederbewerbung,
+        "erfolge": erfolge,
+        "zusaetze": zusaetze,
     }
 
     zeugnis_text = generate_zeugnis(user_data)
 
-    # PDF export
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    for line in zeugnis_text.split("\n"):
-        pdf.multi_cell(0, 10, line)
-
-    pdf.output("zeugnis.pdf")
-    with open("zeugnis.pdf", "rb") as f:
-        st.download_button("📄 Zeugnis herunterladen", f, "zeugnis.pdf")
-
+    st.subheader("📄 Generiertes Zeugnis")
+    st.text_area("Zeugnis", zeugnis_text, height=600)
