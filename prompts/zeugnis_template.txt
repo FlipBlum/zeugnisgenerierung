@@ -1,0 +1,23 @@
+Erstelle ein {art} für {anrede} {titel} {vorname} {nachname}, geboren am {geburtsdatum}. 
+Das Unternehmen {firmenname} ist {firmenbeschreibung}. Die Person war dort als {berufsbezeichnung} tätig, in {beschaeftigung} ab dem {beginn} bis {ende} in der Abteilung {abteilung}, Einsatzort: {einsatzort}. 
+Die Aufgaben umfassten: {taetigkeiten}
+
+Bewertung:
+- Fachwissen: {fachwissen}
+- Belastbarkeit: {belastbarkeit}
+- Auffassungsgabe: {auffassungsgabe}
+- Arbeitsweise: {arbeitsweise}
+- Arbeitserfolg: {arbeitserfolg}
+- Motivation: {motivation}
+- Leistungszusammenfassung: {leistung}
+
+Besondere berufliche Erfolge: {erfolge}
+Zusätzliche Stärken: {zusaetze}
+
+Verhalten gegenüber Kolleg:innen und Führungskräften: {verhalten}
+Kontakt zu Kunden/Geschäftspartnern: {kontakt}
+Grund für das Ausscheiden: {grund}
+Wiederbewerbung erwünscht: {wiederbewerbung}
+Empfehlung: {empfehlung}
+
+Bitte formuliere einen freundlichen, professionellen Fließtext.
