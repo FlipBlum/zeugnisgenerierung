@@ -10,6 +10,7 @@ Ein interaktives Tool zur Erstellung professioneller Arbeits-, Praktikums- und A
 - 🧾 Zeugnistext im professionellen Fließtext-Stil
 - 🔁 Auswahl zwischen mehreren Templates je nach Zeugnistyp
 - 📤 Exportierbarer Text zur Weiterverarbeitung
+- 🏢 Unternehmensbeschreibungen werden dynamisch aus einzelnen Textdateien geladen
 
 ## 🖥️ Vorschau
 
@@ -32,9 +33,22 @@ Ein interaktives Tool zur Erstellung professioneller Arbeits-, Praktikums- und A
 │   ├── ausbildungszeugnis.txt
 │   ├── praktikumszeugnis.txt
 │   └── zeugnis_template.txt
+├── unternehmensbeschreibungen/ # Einzelne .txt-Dateien für jede Firma
+│   ├── TERRAS_Bau_GmbH.txt
+│   ├── ...
 ├── requirements.txt        # Abhängigkeiten
 └── README.md               # Projektdokumentation
 ```
+
+## 🏢 Unternehmensbeschreibungen pflegen
+
+Die Beschreibungen der Unternehmen werden aus einzelnen Textdateien im Ordner `unternehmensbeschreibungen/` geladen. Jede Datei entspricht einem Unternehmen (z.B. `TERRAS_Bau_GmbH.txt`).
+
+**So fügst du ein neues Unternehmen hinzu:**
+1. Lege eine neue `.txt`-Datei im Ordner `unternehmensbeschreibungen/` an.
+2. Der Dateiname sollte dem Unternehmensnamen entsprechen (Leerzeichen durch Unterstriche ersetzen).
+3. Schreibe die gewünschte Beschreibung (zwei Sätze empfohlen) in die Datei.
+4. Nach dem Speichern steht das Unternehmen automatisch in der App zur Auswahl.
 
 ## 🛠️ Installation
 
@@ -55,3 +69,10 @@ echo "OPENAI_API_KEY=dein-openai-api-key" > .env
 
 # 5. App starten
 streamlit run app.py
+```
+
+---
+
+**Hinweis:**
+- Für die Nutzung wird ein OpenAI API Key benötigt.
+- Unternehmensbeschreibungen können jederzeit durch Bearbeiten oder Hinzufügen von .txt-Dateien im Ordner `unternehmensbeschreibungen/` angepasst werden.
