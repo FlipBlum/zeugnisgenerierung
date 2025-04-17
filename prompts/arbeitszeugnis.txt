@@ -1,29 +1,49 @@
 Arbeitszeugnis
 
-${anrede} ${nachname}, geboren am ${geburtsdatum}, war vom ${eintrittsdatum} bis zum ${austrittsdatum} in unserem Unternehmen als ${position} tätig.
+Erstelle ein wohlwollendes, in Deutschland rechtlich zulässiges qualifiziertes Arbeitszeugnis für eine Arbeitnehmerin oder einen Arbeitnehmer. Verwende professionelle, übliche Formulierungen und halte dich an die deutsche Zeugnissprache. Fülle die Platzhalter mit den bereitgestellten Informationen.
 
-Im Rahmen dieser Tätigkeit umfasste ihr/sein Aufgabenbereich unter anderem folgende Schwerpunkte:
+---
+
+Name: ${anrede} ${vorname} ${nachname}
+Geburtsdatum: ${geburtsdatum}
+Beschäftigt vom: ${eintrittsdatum} bis ${austrittsdatum}
+Position: ${position}
+Unternehmen: ${unternehmen}
+Unternehmensbeschreibung: ${unternehmensbeschreibung}
+Abteilung/Einsatzort: ${abteilung}
+
+Tätigkeitsbeschreibung:
 ${taetigkeiten}
 
-${fachwissen}
-${auffassungsgabe}
-${arbeitsweise}
-${belastbarkeit}
-${arbeitserfolg}
-${motivation}
+Leistungsbeurteilung:
+- Fachwissen: ${fachwissen}
+- Auffassungsgabe: ${auffassungsgabe}
+- Arbeitsweise: ${arbeitsweise}
+- Belastbarkeit: ${belastbarkeit}
+- Arbeitserfolg: ${arbeitserfolg}
+- Motivation: ${motivation}
+- Leistungszusammenfassung: ${leistung}
 
-${leistung}
+Soziales Verhalten:
+- Verhalten gegenüber Vorgesetzten: ${verhalten_vorgesetzte}
+- Verhalten gegenüber Kollegen: ${verhalten_kollegen}
+- Verhalten gegenüber Kunden/Partnern: ${kontakt}
 
-${verhalten}
-${kontakt}
-${erfolge}
-${zusaetze}
-${wiederbewerbung}
-${empfehlung}
+Besondere Erfolge und Stärken: ${erfolge}
+Zusätzliche Bemerkungen: ${zusaetze}
 
-${ausscheidungsgrund}
+Grund des Ausscheidens: ${ausscheidungsgrund}
 
-${ort}, ${datum}
+Schlusssatz (Dank, Bedauern, Zukunftswünsche, Empfehlung):
+- Dank: ${dank}
+- Bedauern: ${bedauern}
+- Zukunftswünsche: ${zukunft}
+- Empfehlung: ${empfehlung}
+
+Ort, Datum: ${ort}, ${datum}
 
 (Unterschrift)
+---
+
+Formuliere einen zusammenhängenden, professionellen Fließtext auf Basis dieser Angaben. Verwende keine Aufzählungen im finalen Text.
 

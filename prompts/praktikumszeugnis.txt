@@ -1,29 +1,49 @@
 Praktikumszeugnis
 
-${anrede} ${nachname}, geboren am ${geburtsdatum}, absolvierte in der Zeit vom ${eintrittsdatum} bis zum ${austrittsdatum} ein Praktikum in unserem Unternehmen im Bereich ${position}.
+Erstelle ein wohlwollendes, in Deutschland rechtlich zulässiges qualifiziertes Praktikumszeugnis. Verwende professionelle, übliche Formulierungen und halte dich an die deutsche Zeugnissprache. Fülle die Platzhalter mit den bereitgestellten Informationen.
 
-Während des Praktikums war ${anrede} ${nachname} mit folgenden Aufgaben betraut:
+---
+
+Name: ${anrede} ${vorname} ${nachname}
+Geburtsdatum: ${geburtsdatum}
+Praktikum vom: ${eintrittsdatum} bis ${austrittsdatum}
+Praktikumsbereich/Position: ${position}
+Unternehmen: ${unternehmen}
+Unternehmensbeschreibung: ${unternehmensbeschreibung}
+Abteilung/Einsatzort: ${abteilung}
+
+Tätigkeiten während des Praktikums:
 ${taetigkeiten}
 
-${fachwissen}
-${auffassungsgabe}
-${arbeitsweise}
-${belastbarkeit}
-${arbeitserfolg}
-${motivation}
+Leistungsbeurteilung:
+- Fachwissen: ${fachwissen}
+- Auffassungsgabe: ${auffassungsgabe}
+- Arbeitsweise: ${arbeitsweise}
+- Belastbarkeit: ${belastbarkeit}
+- Arbeitserfolg: ${arbeitserfolg}
+- Motivation: ${motivation}
+- Leistungszusammenfassung: ${leistung}
 
-${leistung}
+Soziales Verhalten:
+- Verhalten gegenüber Vorgesetzten: ${verhalten_vorgesetzte}
+- Verhalten gegenüber Kollegen: ${verhalten_kollegen}
+- Verhalten gegenüber Kunden/Partnern: ${kontakt}
 
-${verhalten}
-${kontakt}
-${erfolge}
-${zusaetze}
-${wiederbewerbung}
-${empfehlung}
+Besondere Erfolge und Stärken: ${erfolge}
+Zusätzliche Bemerkungen: ${zusaetze}
 
-${ausscheidungsgrund}
+Grund des Ausscheidens: ${ausscheidungsgrund}
 
-${ort}, ${datum}
+Schlusssatz (Dank, Bedauern, Zukunftswünsche, Empfehlung):
+- Dank: ${dank}
+- Bedauern: ${bedauern}
+- Zukunftswünsche: ${zukunft}
+- Empfehlung: ${empfehlung}
+
+Ort, Datum: ${ort}, ${datum}
 
 (Unterschrift)
+---
+
+Formuliere einen zusammenhängenden, professionellen Fließtext auf Basis dieser Angaben. Verwende keine Aufzählungen im finalen Text.
 

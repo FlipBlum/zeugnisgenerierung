@@ -24,8 +24,17 @@ Ein interaktives Tool zur Erstellung professioneller Arbeits-, Praktikums- und A
 
 ## 📂 Projektstruktur
 
-├── app.py # Streamlit UI ├── zeugnis_generator.py # Logik zur Textgenerierung ├── prompts/ │ ├── arbeitszeugnis.txt # Template für Arbeitszeugnisse │ ├── praktikum.txt # Template für Praktikumszeugnisse │ └── ausbildung.txt # Template für Ausbildungszeugnisse ├── .env # API-Schlüssel (nicht in Repo pushen) ├── requirements.txt # Abhängigkeiten └── README.md
-
+```
+├── app.py                  # Streamlit UI
+├── zeugnis_generator.py    # Logik zur Textgenerierung
+├── prompts/                # Prompt- und Template-Dateien
+│   ├── arbeitszeugnis.txt
+│   ├── ausbildungszeugnis.txt
+│   ├── praktikumszeugnis.txt
+│   └── zeugnis_template.txt
+├── requirements.txt        # Abhängigkeiten
+└── README.md               # Projektdokumentation
+```
 
 ## 🛠️ Installation
 
